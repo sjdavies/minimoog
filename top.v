@@ -1,6 +1,5 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company:        Davies Consulting Pty. Ltd.
 // Engineer:       Stephen Davies
 // 
 // Create Date:    16:37:10 2 Dec 2012 
@@ -12,7 +11,7 @@
 //
 // Dependencies: 
 //
-// Revision:       0.01
+// Revision:       0.02
 // Revision 0.01 - File Created
 // Additional Comments: 
 //
@@ -51,6 +50,7 @@ module top(
 	
 	wire clk0;			// Buffered 32MHz clock (system clock)
 	wire clk16;			// Buffered 16Mhz clock (for ADC SPI)
+	wire clk16_180;   // Buffered 16Mhz clock (for ADC SPI)
 	wire clkNco;		// Buffered 1.00 MHz clock (for VCO's)
 	
 	wire reset;			// Papilio Pro does not have a user RESET pin, simulate one by delaying startup
@@ -73,14 +73,14 @@ module top(
 	// Core system resources i.e. reset and clock generation
 	//
 	resetgen rst (.reset(reset), .clk(clk0));
-	prescalar prescale (.clk0(clk0), .clk16(clk16), .clkNco(clkNco), .clkin(CLK));
+	prescalar prescale (.clk0(clk0), .clk16(clk16), .clk16_180(clk16_180), .clkNco(clkNco), .clkin(CLK));
 	
 	//
 	// Retrocade board has 2 x ADC088S102 chips
 	// They are polled continuously.
 	//
-	ADC adc1 (.sck(ADC1_SCK), .cs_n(ADC1_nCS), .dout(ADC1_DI), .clk(clk16), .reset(reset), .din(ADC1_DO), .addr(3'b0), .q(A[15:8]));
-	ADC adc2 (.sck(ADC2_SCK), .cs_n(ADC2_nCS), .dout(ADC2_DI), .clk(clk16), .reset(reset), .din(ADC2_DO), .addr(3'b0), .q(A[7:0]));
+	ADC adc1 (.sck(ADC1_SCK), .cs_n(ADC1_nCS), .dout(ADC1_DI), .clk(clk16), .clk180(clk16_180), .reset(reset), .din(ADC1_DO), .addr(3'b0), .q(A[15:8]));
+	ADC adc2 (.sck(ADC2_SCK), .cs_n(ADC2_nCS), .dout(ADC2_DI), .clk(clk16), .clk180(clk16_180), .reset(reset), .din(ADC2_DO), .addr(3'b0), .q(A[7:0]));
 	
 	//NoteTable noteLookup (.midiNote({7'd69}), .freqControl(fcw));
 	

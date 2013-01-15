@@ -5,11 +5,11 @@
 // Create Date:    15:23:50 22 December 2012 
 // Design Name: 
 // Module Name:    uart_rx 
-// Project Name:   MiniMoog Sytnh simulator
+// Project Name:   MiniMoog Synth simulator
 // Target Devices: Spartan 6
 // Tool versions:  ISE 14.4
 //
-// Description:    UART design sourced from book 'FPGA Prototyping by Verilog Examples' by Pong Chu.
+// Description:    UART receiver design sourced from book 'FPGA Prototyping by Verilog Examples' by Pong Chu.
 //                 ISBN 9780470185322.
 //
 // Dependencies: 

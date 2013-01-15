@@ -34,6 +34,7 @@ module ADC
 	)
 	(
    input clk,						// 16 MHz clk (max for ADC088S102)
+	input clk180,					// 16 MHz clock, 180 out of phase
    input reset,					// active high
 
    output sck,						// SPI clock (16MHz max for ADC088S102)
@@ -134,6 +135,6 @@ module ADC
 	//
 	// Spartan 6 requires special handling for sending clk16 on SCK pin. (not a 'special' clock output pin apparently)
 	//
-	ODDR2 ODDR2_inst (.Q(sck), .C0(clk), .C1(!clk), .CE(1'b1), .D0(1'b1), .D1(1'b0), .R(1'b0), .S(1'b0));
+	ODDR2 ODDR2_inst (.Q(sck), .C0(clk), .C1(clk180), .CE(1'b1), .D0(1'b1), .D1(1'b0), .R(1'b0), .S(1'b0));
 		
 endmodule

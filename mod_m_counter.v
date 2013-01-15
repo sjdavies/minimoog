@@ -1,15 +1,15 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Engineer:       Pong Chu
 // 
-// Create Date:    13:49:53 12/21/2012 
-// Design Name: 
-// Module Name:    mod_m_counter 
-// Project Name: 
-// Target Devices: 
-// Tool versions: 
-// Description: 
+// Create Date:    13:49:53 21 December 2012 
+// Module Name:    mod_m_counter
+// Project Name:   MiniMoog Synth simulator
+// Target Devices: Spartan 6
+// Tool versions:  ISE 14.4
+//
+// Description:    Mod M counter design sourced from book 'FPGA Prototyping by Verilog Examples' by Pong Chu.
+//                 ISBN 9780470185322.
 //
 // Dependencies: 
 //
@@ -18,6 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
+
 module mod_m_counter
 	#(
 		parameter N=4,		// number of bits in counter

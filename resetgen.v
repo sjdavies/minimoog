@@ -1,24 +1,23 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company:        Davies Consulting Pty. Ltd.
 // Engineer:       Stephen Davies
 // 
 // Create Date:    16:28:01 6 Jan 2013 
-// Design Name: 
 // Module Name:    resetgen 
 // Project Name:   MiniMoog Synth simulator
 // Target Devices: Spartan 6
 // Tool versions:  ISE 14.4
 // Description:    Papilio Pro board RESET button forces a system reload. Assert an artificial reset
-//                 for 16 clock cycle after reload to ensure it all synchs up.
+//                 for 16 clock cycles after reload to ensure it all synchs up.
 //
 // Dependencies: 
 //
-// Revision:       0.01
+// Revision:       0.02
 // Revision 0.01 - File Created
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
+
 module resetgen(
     input clk,
     output reset

@@ -24,6 +24,7 @@ module prescalar(
     output clk0,
 //	 output clk180,
 	 output clk16,
+	 output clk16_180,
 	 output clkNco
     );
 
@@ -32,20 +33,22 @@ module prescalar(
 	wire unbuf0;
 //	wire unbuf180;
 	wire unbuf16;
+	wire unbuf16_180;
 	
-   IBUFG inBuf     (.O(bufferedIn), .I(clkin));
-	BUFG clkOut0    (.O(clk0), .I(unbuf0));	
-//	BUFG clkOut180  (.O(clk180), .I(unbuf180));
-	BUFG clkOut16   (.O(clk16), .I(unbuf16));
-	BUFG clkOutNco  (.O(clkNco), .I(unbufNco));
+   IBUFG inBuf       (.O(bufferedIn), .I(clkin));
+	BUFG clkOut0      (.O(clk0), .I(unbuf0));	
+//	BUFG clkOut180    (.O(clk180), .I(unbuf180));
+	BUFG clkOut16     (.O(clk16), .I(unbuf16));
+	BUFG clkOut16_180 (.O(clk16_180), .I(unbuf16_180));
+	BUFG clkOutNco    (.O(clkNco), .I(unbufNco));
 	
 	//
 	// Buffer the 32 MHz system clock and generate a 16 MHz clock for use by the SPI ports.
 	//
    DCM_SP #(
-      .CLKDV_DIVIDE(2),                    // CLKDV divide value
-                                            // (1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,9,10,11,12,13,14,15,16).
-      .CLKIN_DIVIDE_BY_2("FALSE"),           // CLKIN divide by two (TRUE/FALSE)
+      .CLKFX_DIVIDE(4),                     // Divide value on CLKFX outputs - D - (1-32)
+      .CLKFX_MULTIPLY(2),                   // Multiply value on CLKFX outputs - M - (2-32)
+      .CLKIN_DIVIDE_BY_2("FALSE"),          // CLKIN divide by two (TRUE/FALSE)
       .CLKIN_PERIOD(31.25),                 // Input clock period specified in nS
       .CLKOUT_PHASE_SHIFT("NONE"),          // Output phase shift (NONE, FIXED, VARIABLE)
       .CLK_FEEDBACK("1X"),                  // Feedback source (NONE, 1X, 2X)
@@ -59,10 +62,11 @@ module prescalar(
       .STARTUP_WAIT("FALSE")                // Delay config DONE until DCM_SP LOCKED (TRUE/FALSE)
    )
    main_dcm (
-      .CLK0(unbuf0),	         // 1-bit output: 0 degree clock output
-      .CLKDV(unbuf16),        // 1-bit output: Divided clock output
-      .CLKFB(clk0),      	   // 1-bit input: Clock feedback input
       .CLKIN(bufferedIn),  	// 1-bit input: Clock input
+      .CLK0(unbuf0),	         // 1-bit output: 0 degree clock output
+      .CLKFB(clk0),      	   // 1-bit input: Clock feedback input
+      .CLKFX(unbuf16),        // 1-bit output: Digital Frequency Synthesizer output (DFS)
+      .CLKFX180(unbuf16_180), // 1-bit output: 180 degree CLKFX output
       .DSSEN(1'b0),         	// 1-bit input: Unsupported, specify to GND.
       .PSCLK(1'b0),         	// 1-bit input: Phase shift clock input
       .PSEN(1'b0),          	// 1-bit input: Phase shift enable
