@@ -1,0 +1,104 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company:        Davies Consulting Pty. Ltd.
+// Engineer:       Stephen Davies
+// 
+// Create Date:    17:30:54 18 December 2012 
+// Design Name: 
+// Module Name:    prescalar 
+// Project Name:   MiniMoog Synth simulator
+// Target Devices: Spartan 6
+// Tool versions:  ISE 14.4
+// Description:    Use the Spartn 6 DCM resources to generate the various clocks required.
+//
+// Dependencies: 
+//
+// Revision:       0.01
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+
+module prescalar(
+    input clkin,
+    output clk0,
+//	 output clk180,
+	 output clk16,
+	 output clkNco
+    );
+
+	wire bufferedIn;
+	wire unbufNco;
+	wire unbuf0;
+//	wire unbuf180;
+	wire unbuf16;
+	
+   IBUFG inBuf     (.O(bufferedIn), .I(clkin));
+	BUFG clkOut0    (.O(clk0), .I(unbuf0));	
+//	BUFG clkOut180  (.O(clk180), .I(unbuf180));
+	BUFG clkOut16   (.O(clk16), .I(unbuf16));
+	BUFG clkOutNco  (.O(clkNco), .I(unbufNco));
+	
+	//
+	// Buffer the 32 MHz system clock and generate a 16 MHz clock for use by the SPI ports.
+	//
+   DCM_SP #(
+      .CLKDV_DIVIDE(2),                    // CLKDV divide value
+                                            // (1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,9,10,11,12,13,14,15,16).
+      .CLKIN_DIVIDE_BY_2("FALSE"),           // CLKIN divide by two (TRUE/FALSE)
+      .CLKIN_PERIOD(31.25),                 // Input clock period specified in nS
+      .CLKOUT_PHASE_SHIFT("NONE"),          // Output phase shift (NONE, FIXED, VARIABLE)
+      .CLK_FEEDBACK("1X"),                  // Feedback source (NONE, 1X, 2X)
+      .DESKEW_ADJUST("SYSTEM_SYNCHRONOUS"), // SYSTEM_SYNCHRNOUS or SOURCE_SYNCHRONOUS
+      .DFS_FREQUENCY_MODE("LOW"),           // Unsupported - Do not change value
+      .DLL_FREQUENCY_MODE("LOW"),           // Unsupported - Do not change value
+      .DSS_MODE("NONE"),                    // Unsupported - Do not change value
+      .DUTY_CYCLE_CORRECTION("TRUE"),       // Unsupported - Do not change value
+      .FACTORY_JF(16'hc080),                // Unsupported - Do not change value
+      .PHASE_SHIFT(0),                      // Amount of fixed phase shift (-255 to 255)
+      .STARTUP_WAIT("FALSE")                // Delay config DONE until DCM_SP LOCKED (TRUE/FALSE)
+   )
+   main_dcm (
+      .CLK0(unbuf0),	         // 1-bit output: 0 degree clock output
+      .CLKDV(unbuf16),        // 1-bit output: Divided clock output
+      .CLKFB(clk0),      	   // 1-bit input: Clock feedback input
+      .CLKIN(bufferedIn),  	// 1-bit input: Clock input
+      .DSSEN(1'b0),         	// 1-bit input: Unsupported, specify to GND.
+      .PSCLK(1'b0),         	// 1-bit input: Phase shift clock input
+      .PSEN(1'b0),          	// 1-bit input: Phase shift enable
+      .PSINCDEC(1'b0),      	// 1-bit input: Phase shift increment/decrement input
+      .RST(1'b0)            	// 1-bit input: Active high reset input
+   );
+
+	//
+	// Divide 32Mhz board clock by 32 to obtain a far more reasonable 1.00 MHz NCO clock
+	//
+	
+   DCM_SP #(
+      .CLKDV_DIVIDE(16),                    // CLKDV divide value
+                                            // (1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,9,10,11,12,13,14,15,16).
+      .CLKIN_DIVIDE_BY_2("TRUE"),           // CLKIN divide by two (TRUE/FALSE)
+      .CLKIN_PERIOD(31.25),                 // Input clock period specified in nS
+      .CLKOUT_PHASE_SHIFT("NONE"),          // Output phase shift (NONE, FIXED, VARIABLE)
+      .CLK_FEEDBACK("NONE"),                  // Feedback source (NONE, 1X, 2X)
+      .DESKEW_ADJUST("SYSTEM_SYNCHRONOUS"), // SYSTEM_SYNCHRNOUS or SOURCE_SYNCHRONOUS
+      .DFS_FREQUENCY_MODE("LOW"),           // Unsupported - Do not change value
+      .DLL_FREQUENCY_MODE("LOW"),           // Unsupported - Do not change value
+      .DSS_MODE("NONE"),                    // Unsupported - Do not change value
+      .DUTY_CYCLE_CORRECTION("TRUE"),       // Unsupported - Do not change value
+      .FACTORY_JF(16'hc080),                // Unsupported - Do not change value
+      .PHASE_SHIFT(0),                      // Amount of fixed phase shift (-255 to 255)
+      .STARTUP_WAIT("FALSE")                // Delay config DONE until DCM_SP LOCKED (TRUE/FALSE)
+   )
+   aux_dcm1 (
+      .CLKDV(unbufNco),       // 1-bit output: Divided clock output
+      .CLKFB(clk0),      	   // 1-bit input: Clock feedback input
+      .CLKIN(bufferedIn),  	// 1-bit input: Clock input
+      .DSSEN(1'b0),         	// 1-bit input: Unsupported, specify to GND.
+      .PSCLK(1'b0),         	// 1-bit input: Phase shift clock input
+      .PSEN(1'b0),          	// 1-bit input: Phase shift enable
+      .PSINCDEC(1'b0),      	// 1-bit input: Phase shift increment/decrement input
+      .RST(1'b0)            	// 1-bit input: Active high reset input
+   );
+
+endmodule

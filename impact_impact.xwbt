@@ -1,0 +1,8 @@
+INTSTYLE=impact
+INFILE=C:\data\logic\Synth1\impact.xsl
+OUTFILE=C:\data\logic\Synth1\impact.xsl
+FAMILY=Multiple
+PART=Multiple
+WORKINGDIR=C:\data\logic\Synth1
+LICENSE=iMPACT
+USER_INFO=iMPACT
