@@ -12,6 +12,7 @@ module dsDAC
 									// for optimum performance, ensure that this ff is in IOB
 	 input [N-1:0] in,		// DAC input (excess 2**MSBI)
 	 input clk,
+	 input nco,
 	 input reset
 	 );
 
@@ -36,11 +37,17 @@ module dsDAC
 				SigmaLatch <= 1'b1 << N;
 				out <= 1'b0;
 			end
-		else
+		else if (nco)
 			begin
 				SigmaLatch <= SigmaAdder;
 				out <= SigmaLatch[N+1];
 			end
+		else
+			begin
+				SigmaLatch <= SigmaLatch;
+				out <= out;
+			end
+			
 	end
 		
 endmodule

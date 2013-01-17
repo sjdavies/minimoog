@@ -45,17 +45,17 @@ NET A(4)           LOC="P61"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A4
 NET A(5)           LOC="P66"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A5
 NET A(6)           LOC="P67"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A6
 NET A(7)           LOC="P75"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A7
-NET A(8)           LOC="P79"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A8
-NET A(9)           LOC="P81"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A9
-NET A(10)          LOC="P83"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A10
-NET A(11)          LOC="P85"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A11
-NET A(12)          LOC="P88"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A12
-NET A(13)          LOC="P93"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A13
-NET A(14)          LOC="P98"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A14
-NET A(15)          LOC="P100" | IOSTANDARD=LVTTL | DRIVE = 12;             # A15
+#NET A(8)           LOC="P79"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A8
+#NET A(9)           LOC="P81"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A9
+#NET A(10)          LOC="P83"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A10
+#NET A(11)          LOC="P85"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A11
+#NET A(12)          LOC="P88"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A12
+#NET A(13)          LOC="P93"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A13
+#NET A(14)          LOC="P98"  | IOSTANDARD=LVTTL | DRIVE = 12;             # A14
+#NET A(15)          LOC="P100" | IOSTANDARD=LVTTL | DRIVE = 12;             # A15
 NET A1R            LOC="P99"  | IOSTANDARD=LVTTL;                          # B0 - Audio 1 out, right channel
 NET A1L            LOC="P97"  | IOSTANDARD=LVTTL;                          # B1 - Audio 1 out, left channel
-#NET A2L            LOC="P92"  | IOSTANDARD=LVTTL;                          # B2 - Audio 2 out, left channel
+NET A2L            LOC="P92"  | IOSTANDARD=LVTTL;                          # B2 - Audio 2 out, left channel
 #NET A2R            LOC="P87"  | IOSTANDARD=LVTTL;                          # B3 - Audio 2 out, right channel
 #NET LCD_DB(7)      LOC="P84"  | IOSTANDARD=LVTTL;                          # B4 - LCD data bit 7
 #NET LCD_DB(6)      LOC="P82"  | IOSTANDARD=LVTTL;                          # B5 - LCD data bit 6
