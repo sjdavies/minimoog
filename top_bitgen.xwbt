@@ -1,8 +1,8 @@
 INTSTYLE=ise
-INFILE=C:\data\logic\Synth1\top.ncd
-OUTFILE=C:\data\logic\Synth1\top.bit
+INFILE=C:\Users\sjdavies\Documents\GitHub\minimoog\top.ncd
+OUTFILE=C:\Users\sjdavies\Documents\GitHub\minimoog\top.bit
 FAMILY=Spartan6
 PART=xc6slx9-2tqg144
-WORKINGDIR=C:\data\logic\Synth1
+WORKINGDIR=C:\Users\sjdavies\Documents\GitHub\minimoog
 LICENSE=WebPack
-USER_INFO=204658786_0_0_654
+USER_INFO=204658786_0_0_150

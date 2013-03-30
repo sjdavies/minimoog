@@ -21,7 +21,7 @@ module top(
 
     input           CLK,                // 32 MHz signal from crystal oscillator
 	
-	// Analog output pins (connected to RC network for low pass filter)
+    // Analog output pins (connected to RC network for low pass filter)
     output          A1L,
     output          A1R,
     output          A2L,
@@ -39,7 +39,7 @@ module top(
     output          ADC2_DI,
     input           ADC2_DO,
 	
-	// utility wing, use for debugging
+    // utility wing, use for debugging
     output [7:0]    A,
 	
     // Unused resources that need to be put into an inert state
@@ -79,9 +79,11 @@ module top(
     // Analog to Digital Converters.
     // Retrocade wing has 2 x ADC088S102 chips, they are polled continuously.
     //
-    ADC         adc1        (.sck(ADC1_SCK), .cs_n(ADC1_nCS), .dout(ADC1_DI), .clk(clk16), .clk180(clk16_180), .reset(reset), .din(ADC1_DO), .addr(oscAddr), .q(oscData));
-    ADC         adc2        (.sck(ADC2_SCK), .cs_n(ADC2_nCS), .dout(ADC2_DI), .clk(clk16), .clk180(clk16_180), .reset(reset), .din(ADC2_DO), .addr(3'b0), .q(A[7:0]));
-	
+    ADC         adc1        (.sck(ADC1_SCK), .cs_n(ADC1_nCS), .dout(ADC1_DI), .clk(clk16), .clk180(clk16_180),
+                             .reset(reset), .din(ADC1_DO), .addr(oscAddr), .q(oscData));
+    ADC         adc2        (.sck(ADC2_SCK), .cs_n(ADC2_nCS), .dout(ADC2_DI), .clk(clk16), .clk180(clk16_180),
+                             .reset(reset), .din(ADC2_DO), .addr(3'b0), .q(A[7:0]));
+
     //
     // Oscillator Bank.
     // Controlled through keyboard and adc1.

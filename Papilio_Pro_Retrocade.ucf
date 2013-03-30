@@ -5,10 +5,13 @@
 # Updated for Retrocade by Stephen Davies
 # Dec 23, 2012
 #
+# Jan 11, 2013 - Stephen Davies
 # Merged with update to Papilio Pro generic UCF v1.1.
 # Fixed direction of USB RX/TX signals.
 # Changed polarity of SDRAM CS signal.
-# Jan 11, 2013 - Stephen Davies
+#
+# Mar 30, 2013 - Stephen Davies
+# Swapped ADC1 and ADC2 pins.
 #
 # Main board wing pin [] to FPGA pin Pxx map
 # -------C-------    -------B-------    -------A-------
@@ -71,14 +74,14 @@ NET A2L            LOC="P92"  | IOSTANDARD=LVTTL;                          # B2 
 #NET JOY_SELECT     LOC="P47"  | IOSTANDARD=LVTTL;                          # B15 - Joystick select
 #NET MIDI_TX        LOC="P114" | IOSTANDARD=LVTTL;                          # C0 - MIDI out driver
 #NET MIDI_RX        LOC="P115" | IOSTANDARD=LVTTL;                          # C1 - MIDI in signal
-NET ADC1_SCK       LOC="P116" | IOSTANDARD=LVTTL | SLEW=FAST;              # C2 - ADC1 - SPI clock
-NET ADC1_DO        LOC="P117" | IOSTANDARD=LVTTL;                          # C3 - ADC1 - SPI data out (adc chip output)
-NET ADC1_DI        LOC="P118" | IOSTANDARD=LVTTL;                          # C4 - ADC1 - SPI data in  (adc chip input)
-NET ADC1_nCS       LOC="P119" | IOSTANDARD=LVTTL;                          # C5 - ADC1 - SPI chip select (active low)
-NET ADC2_SCK       LOC="P120" | IOSTANDARD=LVTTL;                          # C6 - ADC2 - SPI clock
-NET ADC2_DO        LOC="P121" | IOSTANDARD=LVTTL;                          # C7 - ADC2 - SPI data out (adc chip output)
-NET ADC2_DI        LOC="P123" | IOSTANDARD=LVTTL;                          # C8 - ADC2 - SPI data in  (adc chip input)
-NET ADC2_nCS       LOC="P124" | IOSTANDARD=LVTTL;                          # C9 - ADC2 - SPI chip select (active low)
+NET ADC1_SCK       LOC="P120" | IOSTANDARD=LVTTL | SLEW=FAST;              # C6 - ADC1 - SPI clock
+NET ADC1_DO        LOC="P121" | IOSTANDARD=LVTTL;                          # C7 - ADC1 - SPI data out (adc chip output)
+NET ADC1_DI        LOC="P123" | IOSTANDARD=LVTTL;                          # C8 - ADC1 - SPI data in  (adc chip input)
+NET ADC1_nCS       LOC="P124" | IOSTANDARD=LVTTL;                          # C9 - ADC1 - SPI chip select (active low)
+NET ADC2_SCK       LOC="P116" | IOSTANDARD=LVTTL | SLEW=FAST;              # C2 - ADC2 - SPI clock
+NET ADC2_DO        LOC="P117" | IOSTANDARD=LVTTL;                          # C3 - ADC2 - SPI data out (adc chip output)
+NET ADC2_DI        LOC="P118" | IOSTANDARD=LVTTL;                          # C4 - ADC2 - SPI data in  (adc chip input)
+NET ADC2_nCS       LOC="P119" | IOSTANDARD=LVTTL;                          # C5 - ADC2 - SPI chip select (active low)
 #NET SD_DO          LOC="P126" | IOSTANDARD=LVTTL;                          # C10 - SD card - SPI data out
 #NET SD_SCK         LOC="P127" | IOSTANDARD=LVTTL;                          # C11 - SD card - SPI clock
 #NET SD_DI          LOC="P131" | IOSTANDARD=LVTTL;                          # C12 - SD card - SPI data in

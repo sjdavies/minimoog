@@ -22,7 +22,7 @@
 //
 // Dependencies: 
 //
-// Revision:       0.01
+// Revision:       0.02
 // Revision 0.01 - File Created
 // Additional Comments: 
 //
@@ -134,10 +134,11 @@ module ADC #(
         if (!cs_n)
             dataIn <= { dataIn[14:0], din };
         else
-            adcReg[currentPort] <= dataIn[11:4];
+            adcReg[currentPort - 1] <= dataIn[11:4];
 
     //
-    // Spartan 6 requires special handling for sending clk16 on SCK pin. (not a 'special' clock output pin apparently)
+    // Spartan 6 requires special handling for sending clk16 on SCK pin.
+    // Apparently not a 'special' clock output pin.
     //
     ODDR2 ODDR2_inst (.Q(sck), .C0(clk), .C1(clk180), .CE(1'b1), .D0(1'b1), .D1(1'b0), .R(1'b0), .S(1'b0));
 	
